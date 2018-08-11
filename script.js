@@ -1,6 +1,6 @@
 //Declarando constantes e variáveis
-const player1 = "J";
-const player2 = "S";
+const player1 = "X";
+const player2 = "O";
 
 var playTime = player1;
 var gameOver = false;
@@ -15,10 +15,10 @@ function updatePanel() {
 
     if (playTime == player1) {
         var player = document.querySelectorAll("div.painel img")[0];
-        player.setAttribute("src", "img/j.png");
+        player.setAttribute("src", "img/x.png");
     } else {
         var player = document.querySelectorAll("div.painel img")[0];
-        player.setAttribute("src", "img/s.png");
+        player.setAttribute("src", "img/o.png");
     }
 }
 
@@ -31,11 +31,11 @@ function startSpace() {
 
             if (this.getElementsByTagName("img").length == 0) {
                 if (playTime == player1) {
-                    this.innerHTML = "<img src='img/j.png'>";
+                    this.innerHTML = "<img src='img/x.png'>";
                     this.setAttribute("jogada", player1);
                     playTime = player2;
                 } else {
-                    this.innerHTML = "<img src='img/s.png'>";
+                    this.innerHTML = "<img src='img/o.png'>";
                     this.setAttribute("jogada", player2);
                     playTime = player1;
                 }
@@ -60,7 +60,7 @@ async function checkWinner() {
     var c2 = document.getElementById("c2").getAttribute("jogada");
     var c3 = document.getElementById("c3").getAttribute("jogada");
 
-    var vencedor = "";
+    vencedor = "";
 
     if (((a1 == b1 && a1 == c1) || (a1 == a2 && a1 == a3) || (a1 == b2 && a1 == c3)) && a1 != "") {
         vencedor = a1;
@@ -85,8 +85,19 @@ async function checkWinner() {
 
 function changeName() {
     if (gameOver == true) {
-        var name = document.querySelectorAll("div.painel h4")[0];
-        name.innerHTML = "O Ganhador Foi: "
+        document.getElementById("imagem").removeAttribute("src");
+        if (vencedor == player1) {
+            var player = document.querySelectorAll("div.painel img")[0];
+            player.setAttribute("src", "img/x.png");
+            var name = document.querySelectorAll("div.painel h4")[0];
+            name.innerHTML = "O Ganhador Foi: ";
+        }
+        else {
+            var player = document.querySelectorAll("div.painel img")[0];
+            player.setAttribute("src", "img/o.png");
+            var name = document.querySelectorAll("div.painel h4")[0];
+            name.innerHTML = "O Ganhador Foi: ";
+        }
     }
     else {
         var name = document.querySelectorAll("div.painel h4")[0];
